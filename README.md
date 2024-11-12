@@ -26,7 +26,7 @@ HR.AI is a simple web application designed to streamline the hiring process for 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/HRAI.git
+   git clone https://github.com/CyberAboody/HR.AI.git
    cd HRAI
 2. Create and activate a virtual environment:
 
