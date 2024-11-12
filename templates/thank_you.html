@@ -1,0 +1,8 @@
+<!-- templates/thank_you.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Thank You for Your Submission!</h2>
+<p>Your application has been received and is under review.</p>
+<a href="{{ url_for('main.index') }}">Return to Home</a>
+{% endblock %}

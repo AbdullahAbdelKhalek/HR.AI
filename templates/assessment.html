@@ -1,0 +1,15 @@
+<!-- templates/assessment.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Coding Assessment</h2>
+<p>Please solve the following problem:</p>
+<pre>
+Write a Python function that takes a list of integers and returns the list in reverse order.
+</pre>
+<form method="post">
+    <label for="code">Your Code:</label><br>
+    <textarea name="code" id="code" rows="15" cols="80" required></textarea><br><br>
+    <button type="submit">Submit Code</button>
+</form>
+{% endblock %}

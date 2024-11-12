@@ -1,0 +1,15 @@
+<!-- templates/model_selection.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Select OpenAI Model for Evaluations</h2>
+<form method="post">
+    <label for="model">Choose a model:</label><br>
+    <select name="model" id="model" required>
+        <option value="text-davinci-003" {% if current_model == 'text-davinci-003' %}selected{% endif %}>text-davinci-003</option>
+        <option value="gpt-4o" {% if current_model == 'gpt-4o' %}selected{% endif %}>GPT-4o</option>
+        <option value="o1-mini" {% if current_model == 'o1-mini' %}selected{% endif %}>O1 Mini</option>
+    </select><br><br>
+    <button type="submit">Set Model</button>
+</form>
+{% endblock %}

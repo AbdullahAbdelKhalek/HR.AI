@@ -1,0 +1,12 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Junior Software Engineer Position</h1>
+<p>We are looking for a Junior Software Engineer with the following requirements:</p>
+<ul>
+    <li>GPA over 3.0</li>
+    <li>Knowledge of Python</li>
+</ul>
+<a href="{{ url_for('main.apply') }}">Apply Now</a>
+{% endblock %}

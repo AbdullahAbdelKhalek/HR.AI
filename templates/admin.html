@@ -1,0 +1,24 @@
+<!-- templates/admin.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Candidate Results</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Resume</th>
+        <th>Score</th>
+        <th>Passed</th>
+        <th>Answers</th>
+    </tr>
+    {% for candidate in candidates %}
+    <tr>
+        <td>{{ candidate.id }}</td>
+        <td><a href="{{ url_for('static', filename=candidate.resume) }}">Download</a></td>
+        <td>{{ candidate.score }}</td>
+        <td>{{ 'Yes' if candidate.passed else 'No' }}</td>
+        <td><pre>{{ candidate.answers }}</pre></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
