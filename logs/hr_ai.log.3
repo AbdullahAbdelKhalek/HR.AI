@@ -1,0 +1,93 @@
+2024-11-17 17:17:24,611 ERROR: Exception on /admin/candidates [GET] [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py", line 82, in admin_candidates
+    return render_template('admin_candidates.html', candidates=candidates)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 3, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\base.html", line 47, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 33, in block 'content'
+    <td>{{ candidate.date.strftime('%Y-%m-%d') }}</td>
+    ^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'None' has no attribute 'strftime'
+2024-11-17 18:25:13,868 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:25:26,897 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:25:35,883 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:30:09,780 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:30:38,115 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:30:44,881 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:31:35,317 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:31:43,102 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:31:51,685 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:37:01,593 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:37:07,971 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:37:19,279 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:37:39,671 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:37:50,860 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:38:37,389 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 18:39:14,242 INFO: OpenAI API response: {
+  "score": 90,
+  "feedback": "The code correctly reverses a list using Python's slicing feature, which is both correct and efficient for this task. The use of slicing is optimal for reversing a list in Python. However, the code lacks comments, which could help in understanding the logic for someone unfamiliar with Python slicing. Adding a brief comment explaining the use of slicing would improve code quality."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:175]
+2024-11-17 18:39:14,242 INFO: Evaluation Results - Score: 100, Passed: True, Feedback: No deductions. [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:59]
+2024-11-17 22:25:42,238 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 22:26:14,412 INFO: OpenAI API response: {
+  "score": 100,
+  "feedback": "The code is correct and solves the problem as intended by reversing the list using slicing. It is efficient as slicing is a fast operation in Python. There are no syntax errors, and the code is readable. Although there are no comments, the function is simple and self-explanatory, so comments are not necessary in this case."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:175]
+2024-11-17 22:26:14,413 INFO: Evaluation Results - Score: 85, Passed: True, Feedback: Deductions: Syntax error, No comments [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:60]
+2024-11-17 22:30:59,930 INFO: OpenAI API response: {
+  "score": 0,
+  "feedback": "The submission 'idk lol' is not valid Python code. It does not solve any problem, lacks any form of logic or structure, and contains syntax errors. The code is not optimized, readable, or well-commented. Please provide a complete and functional code solution."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:175]
+2024-11-17 22:30:59,930 INFO: Evaluation Results - Score: 90, Passed: True, Feedback: Deductions: Syntax error [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:60]
+2024-11-17 22:50:17,437 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 22:50:18,575 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 22:57:14,765 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 22:57:19,577 ERROR: Exception on /apply [GET] [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 883, in full_dispatch_request
+    return self.finalize_request(rv)
+           ~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 902, in finalize_request
+    response = self.make_response(rv)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1174, in make_response
+    raise TypeError(
+    ...<3 lines>...
+    )
+TypeError: The view function for 'main.apply' did not return a valid response. The function either returned None or ended without a return statement.
+2024-11-17 23:01:03,035 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 23:01:40,715 INFO: OpenAI API response: {
+  "score": 0,
+  "feedback": "The submission 'idk' is not valid Python code. It does not solve any problem, lacks any form of logic or structure, and contains syntax errors. The code is not readable, and there are no comments or documentation. Please provide a complete and functional code submission for evaluation."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:186]
+2024-11-17 23:01:40,716 INFO: Evaluation Results - Score: 0, Passed: False, Feedback: Deductions: Syntax error, Syntax errors, No comments, Not valid python code, Does not solve any problem, Lacks any form of logic or structure, Not readable [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:65]
+2024-11-17 23:02:46,308 INFO: OpenAI API response: {
+  "score": 100,
+  "feedback": "The code is correct and solves the problem as intended by reversing the list using slicing. It is efficient, as slicing is a fast operation for reversing lists in Python. The code is syntactically correct and readable, though it lacks comments. However, given the simplicity of the function, comments are not strictly necessary."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:186]
+2024-11-17 23:02:46,309 INFO: Evaluation Results - Score: 100, Passed: True, Feedback: No deductions. [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:65]

@@ -1,0 +1,153 @@
+2024-11-17 16:12:03,081 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:12:54,622 INFO: OpenAI API response: ```json
+{
+  "score": 100,
+  "feedback": "The code correctly solves the problem of reversing a list using Python's slicing technique. It is both correct and efficient, as slicing is a highly optimized operation in Python. The code is free of syntax errors and is readable. The candidate has also provided a concise comment explaining the use of slicing, which enhances code quality. Overall, the submission meets all evaluation criteria effectively."
+}
+``` [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:147]
+2024-11-17 16:12:54,623 ERROR: Failed to parse JSON from AI's response. [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:156]
+2024-11-17 16:12:54,625 ERROR: Exception on /assessment [POST] [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: table candidate has no column named date
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py", line 62, in assessment
+    db.session.commit()
+    ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\scoping.py", line 597, in commit
+    return self._proxied.commit()
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 2028, in commit
+    trans.commit(_to_root=True)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "<string>", line 2, in commit
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1313, in commit
+    self._prepare_impl()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "<string>", line 2, in _prepare_impl
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 1288, in _prepare_impl
+    self.session.flush()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    ~~~~~~~~~~~^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.mapper,
+        ^^^^^^^^^^^^
+        uow.states_for_mapper_hierarchy(self.mapper, False, False),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        uow,
+        ^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        base_mapper,
+        ^^^^^^^^^^^^
+    ...<3 lines>...
+        insert,
+        ^^^^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+        statement,
+        params,
+        execution_options=execution_options,
+    )
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table candidate has no column named date
+[SQL: INSERT INTO candidate (resume, score, passed, answers, date, developer_feedback) VALUES (?, ?, ?, ?, ?, ?)]
+[parameters: ('Resume_-_Abdullah_Abdel-Khalek_WE24.pdf', 0, 0, "def reverse_list(input_list):\r\n    return input_list[::-1]\r\n#This function uses Python's slicing technique, where [::-1] reverses the list.", '2024-11-17 22:12:54.624119', 'No comment')]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-11-17 16:17:08,589 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:17:22,634 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:17:41,226 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:18:10,980 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:18:20,005 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:18:28,449 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:23:47,681 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:23:56,226 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]

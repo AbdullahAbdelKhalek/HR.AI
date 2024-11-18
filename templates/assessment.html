@@ -2,14 +2,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Coding Assessment</h2>
-<p>Please solve the following problem:</p>
-<pre>
-Write a Python function that takes a list of integers and returns the list in reverse order.
-</pre>
-<form method="post">
-    <label for="code">Your Code:</label><br>
-    <textarea name="code" id="code" rows="15" cols="80" required></textarea><br><br>
-    <button type="submit">Submit Code</button>
-</form>
+<div class="container mt-5">
+    <h2>Coding Assessment</h2>
+    <p>Please solve the following problem:</p>
+    <pre>
+{{ question_text }}
+    </pre>
+    <form method="post">
+        <div class="mb-3">
+            <label for="code" class="form-label">Your Code:</label>
+            <textarea name="code" id="code" rows="15" class="form-control" placeholder="Enter your Python code here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Code</button>
+    </form>
+</div>
+
+<!-- Custom JavaScript for Handling Tab Key -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const textarea = document.getElementById('code');
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+
+                // Set textarea value to: text before caret + 4 spaces + text after caret
+                this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+
+                // Move the caret after the inserted spaces
+                this.selectionStart = this.selectionEnd = start + 4;
+            }
+        });
+    });
+</script>
 {% endblock %}

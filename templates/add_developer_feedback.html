@@ -1,0 +1,17 @@
+<!-- templates/add_developer_feedback.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add Developer Feedback for Candidate {{ candidate.id }}</h2>
+    <form method="post">
+        <div class="mb-3">
+            <label for="developer_feedback" class="form-label">Developer Feedback</label>
+            <textarea class="form-control" id="developer_feedback" name="developer_feedback" rows="5">{{ candidate.developer_feedback }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Feedback</button>
+        <a href="{{ url_for('main.admin_candidates') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

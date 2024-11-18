@@ -1,0 +1,133 @@
+<!-- templates/admin_candidates.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Passed Candidates</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Resume</th>
+                <th>Passed</th>
+                <th>Score</th>
+                <th>Date</th>
+                <th>Developer Feedback</th>
+                <th>Overall Evaluation</th>
+                <th>Questions Asked</th>
+                <th>Candidate Answers</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidate in passed_candidates %}
+                <tr>
+                    <td>{{ candidate.id }}</td>
+                    <td>
+                        <a href="{{ url_for('main.uploaded_file', filename=candidate.resume) }}" download>Download</a>
+                    </td>
+                    <td>
+                        {% if candidate.passed %}
+                            <span class="badge bg-success">Yes</span>
+                        {% else %}
+                            <span class="badge bg-danger">No</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ candidate.score }}</td>
+                    <td>
+                        {% if candidate.date %}
+                            {{ candidate.date.strftime('%Y-%m-%d') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{{ candidate.developer_feedback or 'No comment' }}</td>
+                    
+                    <!-- Overall Evaluation Column -->
+                    <td class="truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ candidate.overall_evaluation or 'N/A' }}">
+                        {% if candidate.overall_evaluation %}
+                            {{ candidate.overall_evaluation[:100] + ('...' if candidate.overall_evaluation|length > 100 else '') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    
+                    <!-- Questions Asked Column -->
+                    <td class="truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ candidate.questions_asked or 'N/A' }}">
+                        {% if candidate.questions_asked %}
+                            {{ candidate.questions_asked[:80] + ('...' if candidate.questions_asked|length > 80 else '') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    
+                    <!-- Candidate Answers Column -->
+                    <td class="truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ candidate.answers or 'N/A' }}">
+                        {% if candidate.answers %}
+                            {{ candidate.answers[:80] + ('...' if candidate.answers|length > 80 else '') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    
+                    <td>
+                        <a href="{{ url_for('main.add_developer_feedback', candidate_id=candidate.id) }}" class="btn btn-warning btn-sm">Edit Feedback</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="mt-5">Failed Candidates</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Resume</th>
+                <th>Passed</th>
+                <th>Score</th>
+                <th>Date</th>
+                <th>Developer Feedback</th>
+                <th>Overall Evaluation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidate in failed_candidates %}
+                <tr>
+                    <td>{{ candidate.id }}</td>
+                    <td>
+                        <a href="{{ url_for('main.uploaded_file', filename=candidate.resume) }}" download>Download</a>
+                    </td>
+                    <td>
+                        <span class="badge bg-danger">No</span>
+                    </td>
+                    <td>{{ candidate.score }}</td>
+                    <td>
+                        {% if candidate.date %}
+                            {{ candidate.date.strftime('%Y-%m-%d') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    <td>{{ candidate.developer_feedback or 'No comment' }}</td>
+                    
+                    <!-- Overall Evaluation Column -->
+                    <td class="truncate" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ candidate.overall_evaluation or 'N/A' }}">
+                        {% if candidate.overall_evaluation %}
+                            {{ candidate.overall_evaluation[:100] + ('...' if candidate.overall_evaluation|length > 100 else '') }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                    
+                    <td>
+                        <a href="{{ url_for('main.add_developer_feedback', candidate_id=candidate.id) }}" class="btn btn-warning btn-sm">Edit Feedback</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

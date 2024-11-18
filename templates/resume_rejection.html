@@ -1,0 +1,14 @@
+<!-- templates/resume_rejection.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2>Thank You for Your Application!</h2>
+    <p>Unfortunately, your application did not move forward due to the following reason(s):</p>
+    <div class="alert alert-warning" role="alert">
+        {{ feedback }}
+    </div>
+    <p>If you believe this is incorrect, please review your resume and reapply.</p>
+    <a href="{{ url_for('main.apply') }}" class="btn btn-primary">Reapply</a>
+</div>
+{% endblock %}

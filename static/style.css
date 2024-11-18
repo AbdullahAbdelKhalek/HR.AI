@@ -1,4 +1,5 @@
 /* static/style.css */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
@@ -6,7 +7,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px; /* Increased width to accommodate wider tables */
     margin: auto;
 }
 
@@ -58,6 +59,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    table-layout: fixed; /* Enables fixed table layout */
 }
 
 table, th, td {
@@ -67,4 +69,47 @@ table, th, td {
 th, td {
     padding: 12px;
     text-align: left;
+    vertical-align: top; /* Align text to the top */
+}
+
+/* New CSS for Truncated Columns */
+.truncate {
+    max-width: 400px; /* Adjust as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer; /* Indicates that the cell is interactive */
+}
+
+/* Responsive Design Enhancements */
+@media (max-width: 1200px) {
+    .truncate {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        margin: 10px;
+    }
+
+    .truncate {
+        max-width: 200px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
+
+/* Styles for Code Textarea */
+textarea#code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f1f1f1;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    resize: vertical;
+    width: 100%;
+    height: 300px;
 }

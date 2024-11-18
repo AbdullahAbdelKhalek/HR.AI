@@ -3,8 +3,9 @@
 import os
 import PyPDF2
 import re
-from openai import OpenAI  # Import the new OpenAI client
-from app.models import Configuration
+import json
+from openai import OpenAI
+from app.models import Configuration, Candidate, RejectedCandidate
 from flask import current_app
 from dotenv import load_dotenv
 from . import db
@@ -43,75 +44,86 @@ def parse_resume(filename):
         raise e
     return resume_text
 
-def check_requirements(resume_text):
+def check_requirements_ai(resume_text):
     """
-    Checks if the resume meets the required criteria:
-    - GPA over 3.0
-    - Knowledge of Python
+    Uses AI to check if the resume meets the required criteria.
+    Returns a tuple (meets_requirements, feedback).
     """
-    gpa_match = re.search(r'GPA[:\s]*([0-9]\.[0-9])', resume_text, re.IGNORECASE)
-    python_knowledge = 'python' in resume_text.lower()
+    prompt = f"""
+You are an HR assistant helping to screen resumes.
 
-    if gpa_match:
-        try:
-            gpa = float(gpa_match.group(1))
-        except ValueError:
-            gpa = 0.0
-    else:
-        gpa = 0.0
+Evaluate the following resume text to determine if the candidate meets the following requirements:
+- GPA of 3.0 or higher. **If GPA is missing from the resume, consider it as not meeting the GPA requirement.**
+- Knowledge of Python.
 
-    meets_gpa = gpa >= 3.0
-    meets_python = python_knowledge
+If the candidate does not meet any of the requirements, specify which requirement(s) is not met and provide a brief explanation.
 
-    return meets_gpa and meets_python
+Resume Text:
+\"\"\"{resume_text}\"\"\"
 
-def apply_grading_rubric(feedback):
-    """
-    Applies a grading rubric to the AI's feedback to calculate the final score.
-    """
-    score = 100
-    deductions = {
-        'syntax error': 10,
-        'inefficient code': 5,
-        'poor readability': 5,
-        'no comments': 5,
-        'incorrect solution': 20,
-        'optimization needed': 10,
-        'missing edge cases': 10,
-        'lack of error handling': 5,
-    }
+Provide the evaluation in JSON format:
+{{
+  "meets_requirements": true or false,
+  "feedback": "<Feedback explaining whether the candidate meets the requirements and why>"
+}}
+"""
 
-    feedback_lower = feedback.lower()
-    for issue, penalty in deductions.items():
-        if issue in feedback_lower:
-            score -= penalty
+    # Call OpenAI API
+    try:
+        response = client.chat.completions.create(
+            model='gpt-4',
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that evaluates resumes."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=500,
+            temperature=0
+        )
+    except Exception as e:
+        current_app.logger.error(f"Error during OpenAI API call for resume screening: {e}")
+        return False, 'Error during resume evaluation.'
 
-    score = max(score, 0)
-    passed = score >= 70
+    # Parse the response
+    output = response.choices[0].message.content.strip()
+    current_app.logger.info(f"AI Response for Resume Screening: {output}")
+    # Remove code blocks or markdown formatting if necessary
+    json_str = re.sub(r'```json|```', '', output).strip()
+    # Parse JSON
+    try:
+        result = json.loads(json_str)
+        meets_requirements_str = result.get('meets_requirements', False)
+        # Convert to Boolean
+        if isinstance(meets_requirements_str, bool):
+            meets_requirements = meets_requirements_str
+        elif isinstance(meets_requirements_str, str):
+            meets_requirements = meets_requirements_str.lower() == 'true'
+        else:
+            meets_requirements = False
+        feedback = result.get('feedback', '')
+    except json.JSONDecodeError:
+        current_app.logger.error("Failed to parse JSON from AI's response.")
+        meets_requirements = False
+        feedback = 'Error parsing AI response.'
 
-    return score, passed
+    return meets_requirements, feedback
 
-def evaluate_code(code, model='gpt-3.5-turbo'):
-    """
-    Evaluates the submitted code using the specified OpenAI model.
-    Default model is 'gpt-3.5-turbo'.
-    """
+def evaluate_code(code, model='gpt-4'):
     # Fetch the selected model from the database or use the default
     config = Configuration.query.first()
     selected_model = config.openai_model if config and config.openai_model else model
 
-    # Validate the model name
-    valid_models = ['gpt-3.5-turbo', 'gpt-4']
-    if selected_model not in valid_models:
-        current_app.logger.warning(
-            f"Model '{selected_model}' is not valid. Using default model '{model}'."
-        )
-        selected_model = model
+    # Fetch recent developer feedbacks to use as examples
+    recent_feedbacks = Candidate.query.filter(Candidate.developer_feedback != 'No comment').order_by(Candidate.date.desc()).limit(3).all()
+
+    # Build few-shot examples
+    examples = ''
+    for candidate in recent_feedbacks:
+        examples += f"Example code:\n{candidate.answers}\nFeedback:\n{candidate.developer_feedback}\n\n"
 
     messages = [
-        {"role": "system", "content": "You are a senior software engineer."},
+        {"role": "system", "content": "You are a senior software engineer evaluating code submissions. Provide output strictly in JSON format without any markdown or code block formatting."},
         {"role": "user", "content": f"""
-Evaluate the following Python code submitted by a candidate for correctness, efficiency, and code quality. Provide a score out of 100 and a brief feedback.
+Now evaluate the following Python code submitted by a candidate for correctness, efficiency, and code quality.
 
 Candidate's code:
 {code}
@@ -121,9 +133,34 @@ Evaluation criteria:
 - Efficiency: Is the code optimized?
 - Code Quality: Are there any syntax errors? Is the code readable and well-commented?
 
-Provide the score and feedback in the following format:
-Score: <score>
-Feedback: <feedback>
+Provide the score, feedback, and issues in JSON format as follows:
+{{
+  "score": <score out of 100>,
+  "feedback": "<feedback text>",
+  "issues": ["<issue1>", "<issue2>", ...]
+}}
+
+Possible issues include:
+- "syntax errors"
+- "inefficient code"
+- "poor readability"
+- "no comments"
+- "incorrect solution"
+- "not valid python code"
+- "invalid code"
+- "does not solve any problem"
+- "lacks any form of logic or structure"
+- "optimization needed"
+- "missing edge cases"
+- "lack of error handling"
+- "not optimized"
+- "not readable"
+- "not well-commented"
+- "incomplete code"
+
+Only include the issues that are present in the code. If there are no issues, provide an empty list for "issues": [].
+
+Do not include any additional text, explanations, or formatting. Only provide the JSON response.
 """}
     ]
 
@@ -131,28 +168,124 @@ Feedback: <feedback>
         response = client.chat.completions.create(
             model=selected_model,
             messages=messages,
-            max_tokens=200,
+            max_tokens=500,
             temperature=0
         )
 
         # Access content using dot notation
         output = response.choices[0].message.content.strip()
-        score_match = re.search(r'Score:\s*(\d+)', output)
-        feedback_match = re.search(r'Feedback:\s*(.*)', output, re.DOTALL)
+        current_app.logger.info(f"OpenAI API response: {output}")
 
-        if score_match and feedback_match:
-            ai_score = int(score_match.group(1))
-            feedback = feedback_match.group(1).strip()
-            final_score, passed = apply_grading_rubric(feedback)
-        else:
+        # Remove markdown code blocks if present
+        json_str = re.sub(r'```json|```', '', output).strip()
+
+        # Parse the JSON output
+        try:
+            result = json.loads(json_str)
+            ai_score = int(result.get('score', 0))
+            feedback = result.get('feedback', '').strip()
+            issues = result.get('issues', [])
+            final_score, passed, detailed_feedback = apply_grading_rubric(issues)
+        except json.JSONDecodeError:
+            current_app.logger.error("Failed to parse JSON from AI's response after cleaning.")
             final_score = 0
             feedback = 'Unable to evaluate the code.'
             passed = False
+            detailed_feedback = feedback
 
     except Exception as e:
         current_app.logger.error(f"Error during OpenAI evaluation: {e}")
         final_score = 0
         feedback = 'Error during code evaluation.'
         passed = False
+        detailed_feedback = feedback
 
-    return final_score, passed, feedback
+    return final_score, passed, detailed_feedback
+
+def apply_grading_rubric(issues):
+    """
+    Applies a grading rubric based on the list of issues to calculate the final score.
+    """
+    score = 100
+    deductions = {
+        'syntax errors': 10,
+        'inefficient code': 5,
+        'poor readability': 5,
+        'no comments': 5,
+        'incorrect solution': 20,
+        'not valid python code': 50,
+        'invalid code': 50,
+        'does not solve any problem': 20,
+        'lacks any form of logic or structure': 20,
+        'optimization needed': 10,
+        'missing edge cases': 10,
+        'lack of error handling': 5,
+        'not optimized': 5,
+        'not readable': 5,
+        'not well-commented': 5,
+        'incomplete code': 50,
+    }
+
+    deduction_reasons = []
+    for issue in issues:
+        penalty = deductions.get(issue.lower(), 0)
+        if penalty > 0:
+            score -= penalty
+            deduction_reasons.append(f"{issue.capitalize()} (-{penalty})")
+
+    score = max(score, 0)
+    passed = score >= 70
+    detailed_feedback = f"Deductions: {', '.join(deduction_reasons)}" if deduction_reasons else "No deductions."
+
+    return score, passed, detailed_feedback
+
+def generate_overall_evaluation(resume_text, code, model='gpt-4'):
+    """
+    Uses AI to generate an overall evaluation combining the resume and code submission.
+    The evaluation is a brief, balanced paragraph highlighting strengths and areas for improvement.
+    Limited to 375 characters (~56 words).
+    """
+    prompt = f"""
+You are an experienced HR specialist and software engineer. Based on the following resume and code submission, provide an overall evaluation of the candidate in a brief, constructive paragraph no longer than 375 characters (approximately 56 words).
+
+Resume:
+\"\"\"
+{resume_text}
+\"\"\"
+
+Code Submission:
+\"\"\"
+{code}
+\"\"\"
+
+Provide your evaluation focusing on the candidate's skills, experience, and coding abilities. Highlight strengths and note areas for improvement in a supportive and encouraging manner.
+
+Provide the evaluation in plain text without any additional formatting.
+"""
+
+    try:
+        response = client.chat.completions.create(
+            model=model,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that evaluates candidates based on their resume and code submission."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=150,  # Limit tokens to ensure brevity
+            temperature=0.5  # Slight creativity for balanced feedback
+        )
+
+        # Get the AI's response
+        overall_evaluation = response.choices[0].message.content.strip()
+        current_app.logger.info(f"AI Overall Evaluation Response: {overall_evaluation}")
+
+        # Truncate the evaluation to 375 characters if necessary
+        if len(overall_evaluation) > 375:
+            overall_evaluation = overall_evaluation[:372] + '...'
+
+        current_app.logger.info(f"Truncated AI Overall Evaluation Response: {overall_evaluation}")
+
+    except Exception as e:
+        current_app.logger.error(f"Error during AI overall evaluation: {e}")
+        overall_evaluation = 'Error generating overall evaluation.'
+
+    return overall_evaluation

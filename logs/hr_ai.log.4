@@ -1,0 +1,96 @@
+2024-11-17 16:24:09,395 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:24:15,614 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:25:19,629 INFO: OpenAI API response: ```json
+{
+  "score": 100,
+  "feedback": "The code correctly solves the problem of reversing a list of integers. It uses Python's slicing feature, which is both correct and efficient for this task. The code is optimized as slicing is a fast operation for reversing lists in Python. There are no syntax errors, and the code is readable and well-commented. The function includes a docstring that clearly explains its purpose, parameters, and return value. Overall, the code is well-written and meets all the evaluation criteria."
+}
+``` [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:147]
+2024-11-17 16:25:19,630 ERROR: Failed to parse JSON from AI's response. [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:156]
+2024-11-17 16:29:49,344 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:30:04,559 INFO: OpenAI API response: ```json
+{
+  "score": 100,
+  "feedback": "The code correctly solves the problem of reversing a list of integers. It uses Python's slicing feature, which is both correct and efficient for this task. The code is free of syntax errors and is well-documented with a clear docstring explaining the function's purpose, parameters, and return value. The example usage demonstrates the function's behavior effectively. Overall, the code is concise, readable, and meets all the evaluation criteria."
+}
+``` [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:146]
+2024-11-17 16:30:04,560 ERROR: Failed to parse JSON from AI's response. [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:155]
+2024-11-17 16:32:47,805 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 16:33:08,314 INFO: OpenAI API response: {
+  "score": 100,
+  "feedback": "The code correctly reverses a list of integers using Python's slicing feature, which is both correct and efficient. The function is well-documented with a clear docstring, and the example usage demonstrates the function's purpose effectively. There are no syntax errors, and the code is readable and concise."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:148]
+2024-11-17 17:06:11,521 ERROR: Exception on /admin/candidates [GET] [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py", line 79, in admin_candidates
+    return render_template('admin_candidates.html', candidates=candidates)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 3, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\base.html", line 47, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 33, in block 'content'
+    <td>{{ candidate.date.strftime('%Y-%m-%d') }}</td>
+    ^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'None' has no attribute 'strftime'
+2024-11-17 17:06:20,988 ERROR: Exception on /admin/candidates [GET] [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py", line 79, in admin_candidates
+    return render_template('admin_candidates.html', candidates=candidates)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 3, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\base.html", line 47, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 33, in block 'content'
+    <td>{{ candidate.date.strftime('%Y-%m-%d') }}</td>
+    ^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\utils.py", line 83, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+       ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+jinja2.exceptions.UndefinedError: 'None' has no attribute 'strftime'
+2024-11-17 17:16:19,343 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 17:16:35,471 INFO: OpenAI API response: {
+  "score": 100,
+  "feedback": "The code correctly reverses a list of integers using Python's slicing feature, which is both correct and efficient. The function is well-documented with a clear docstring, and the example usage demonstrates its functionality. There are no syntax errors, and the code is readable and concise. Overall, the solution is optimal and meets all evaluation criteria."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:148]
+2024-11-17 17:16:35,472 INFO: Evaluation Results - Score: 90, Passed: True, Feedback: Deductions: Syntax error [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:51]

@@ -1,8 +1,27 @@
 <!-- templates/thank_you.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Thank You for Your Submission!</h2>
-<p>Your application has been received and is under review.</p>
-<a href="{{ url_for('main.index') }}">Return to Home</a>
+<div class="container mt-5 text-center">
+    <h2>Thank You for Your Submission!</h2>
+    {% if session.get('passed') %}
+        <div class="alert alert-success" role="alert">
+            <i class="bi bi-check-circle-fill"></i>
+            Congratulations! You have passed the assessment with a score of {{ session.get('score') }}.
+            <br>
+            <strong>Feedback:</strong> {{ session.get('feedback') }}
+        </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">
+            <i class="bi bi-x-circle-fill"></i>
+            Unfortunately, your application did not move forward.
+            <br>
+            <strong>Your score:</strong> {{ session.get('score') }}
+            <br>
+            <strong>Feedback:</strong> {{ session.get('feedback') }}
+        </div>
+    {% endif %}
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary">Return to Home</a>
+</div>
 {% endblock %}

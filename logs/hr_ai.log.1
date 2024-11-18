@@ -1,0 +1,84 @@
+2024-11-17 23:52:35,772 ERROR: Exception on /admin/candidates [GET] [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py", line 105, in admin_candidates
+    return render_template('admin_candidates.html', candidates=candidates)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\venv\Lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 3, in top-level template code
+    {% extends 'base.html' %}
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\base.html", line 47, in top-level template code
+    {% block content %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\templates\admin_candidates.html", line 49, in block 'content'
+    {{ candidate.overall_evaluation[:100] + ('...' if candidate.overall_evaluation|length > 100 else '') }}
+    ^
+TypeError: 'NoneType' object is not subscriptable
+2024-11-17 23:57:00,181 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-17 23:57:12,928 INFO: AI Response for Resume Screening: {
+  "meets_requirements": false,
+  "feedback": "The candidate demonstrates knowledge of Python, as mentioned in the 'Relevant Projects' and 'Skills' sections of the resume. However, the GPA is not mentioned in the resume, which does not meet the requirement of a GPA of 3.0 or higher."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-17 23:57:22,586 INFO: AI Response for Resume Screening: {
+  "meets_requirements": false,
+  "feedback": "The candidate has a GPA of 3.64, which meets the GPA requirement of 3.0 or higher. However, the candidate does not meet the requirement for knowledge of Python. While the resume lists several programming languages, Python is not included."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-17 23:57:31,671 INFO: AI Response for Resume Screening: {
+  "meets_requirements": false,
+  "feedback": "The candidate does not meet the GPA requirement as their GPA is 2.0, which is below the required 3.0. However, the candidate does meet the requirement for knowledge of Python as it is mentioned in their skills and in the description of their senior capstone project."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-17 23:57:42,384 INFO: AI Response for Resume Screening: {
+  "meets_requirements": true,
+  "feedback": "The candidate meets all the requirements. The GPA is 3.64, which is higher than the required 3.0. The candidate also has knowledge of Python as indicated in the 'Relevant Projects' and 'Skills' sections of the resume."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-17 23:58:42,869 INFO: OpenAI API response: {
+  "score": 100,
+  "feedback": "The code is correct, efficient, and of high quality. It correctly reverses a list using Python's slicing syntax. The code is optimized as it uses Python's built-in functionality to achieve the desired result. The code is readable and doesn't contain any syntax errors. However, it lacks comments which could have been useful for understanding the code's purpose at a glance."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:160]
+2024-11-17 23:58:42,870 INFO: Evaluation Results - Score: 80, Passed: True, Feedback: Deductions: Syntax error, Syntax errors [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:66]
+2024-11-17 23:58:50,612 INFO: AI Overall Evaluation Response: Abdullah Abdel-Khalek appears to be a dedicated and ambitious candidate with a strong academic background in Computer Engineering and Analytics from the University of Houston, with a commendable GPA of 3.64. His relevant coursework and projects demonstrate a solid understanding of AI, IoT, Machine Learning, and Data Analytics, which are crucial skills in the current tech industry. His experience with Sensytec Inc. shows his ability to apply these skills in a real-world setting, with impressive results such as significant cost reduction and sensor lifespan improvement. 
+
+His leadership experience as the co-founder of the Innovators Guild indicates his initiative and collaborative skills. His multilingual abilities could be an asset in a diverse, international work environment. 
+
+However, his work experience [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:264]
+2024-11-18 00:24:18,856 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-18 00:24:27,219 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-18 00:26:09,492 INFO: HR.AI startup [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\__init__.py:39]
+2024-11-18 00:26:21,122 INFO: AI Response for Resume Screening: {
+  "meets_requirements": false,
+  "feedback": "The candidate demonstrates knowledge of Python, as mentioned in the 'Skills' and 'Relevant Projects' sections. However, the GPA is not mentioned in the resume, which does not meet the requirement of a GPA of 3.0 or higher."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-18 00:26:31,463 INFO: AI Response for Resume Screening: {
+  "meets_requirements": false,
+  "feedback": "The candidate has a GPA of 3.64, which meets the GPA requirement of 3.0 or higher. However, the resume does not indicate knowledge of Python, which is a requirement for this position. The candidate's programming skills include C, SQL, and MATLAB, but Python is not mentioned."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-18 00:26:41,997 INFO: AI Response for Resume Screening: {
+  "meets_requirements": false,
+  "feedback": "The candidate does not meet the GPA requirement as their GPA is 2.0, which is below the required 3.0. However, the candidate does meet the Python knowledge requirement as they have mentioned Python in their skills and also used it in their projects."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-18 00:26:51,605 INFO: AI Response for Resume Screening: {
+  "meets_requirements": true,
+  "feedback": "The candidate meets all the requirements. The GPA listed is 3.64, which is higher than the required 3.0. The candidate also has knowledge of Python, as indicated in the 'Relevant Projects' and 'Skills' sections of the resume."
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:88]
+2024-11-18 00:27:18,495 INFO: OpenAI API response: {
+  "score": 85,
+  "feedback": "The code is correct and efficient. It successfully reverses a list of numbers. However, it lacks comments which would explain its functionality to other developers.",
+  "issues": ["no comments"]
+} [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:177]
+2024-11-18 00:27:18,496 INFO: Evaluation Results - Score: 95, Passed: True, Feedback: Deductions: No comments (-5) [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\routes.py:72]
+2024-11-18 00:27:23,313 INFO: AI Overall Evaluation Response: Abdullah Abdel-Khalek's resume showcases strong technical skills, impressive projects, and meaningful work experiences. His knowledge of Python, C, SQL, and MATLAB, along with his experience in AI, Machine Learning, and IoT, is commendable. His code submission is simple but demonstrates a good grasp of Python. However, more complex code samples would provide a better understanding of his coding abilities. His leadership roles and fluency in multiple languages further enhance his profile. [in C:\Users\Abdullah\OneDrive - University Of Houston\HR.AI_DEV2\app\utils.py:279]
