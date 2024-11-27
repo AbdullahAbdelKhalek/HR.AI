@@ -1,9 +1,6 @@
 ## 📄 README.md
 
-
 # HR.AI
-
-
 
 ## 📖 Table of Contents
 
@@ -177,6 +174,10 @@ The Admin Dashboard provides two separate tables:
   - [Flask-Migrate](https://flask-migrate.readthedocs.io/) - Database migrations
   - [dotenv](https://pypi.org/project/python-dotenv/) - Environment variable management
 
+## 📜 License
+
+**Important Note:**  
+This project is currently in the process of being licensed. Until the licensing process is complete, all rights to this project, including its use, modification, and distribution, are reserved by the authors. For questions or permissions, please contact the repository owner.
 
 ## 📫 Contact
 
@@ -187,13 +188,6 @@ The Admin Dashboard provides two separate tables:
 ## 🗂 Changelog
 
 
-```
-
----
-
-## 📄 CHANGELOG.md
-
-```markdown
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -232,6 +226,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - **Initial Setup Issues:** Resolved various bugs related to file uploads and database interactions to ensure smooth operation.
-
-```
-
